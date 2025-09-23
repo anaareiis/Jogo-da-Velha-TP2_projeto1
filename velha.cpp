@@ -45,11 +45,13 @@ int VerificaVelha(int velha[3][3]) {
         if (velha[0][2] == 1) win1 = 1; else win2 = 1;
     }
 
-	if (win1) return 1;
+    if (win1 && win2) return -2; // impossível (dois vencedores)
+    if (win1) return 1;
     if (win2) return 2;
 
-    if (countEmpty == 0) return 0; // empate
-    return -1; // ainda há jogadas possíveis -> indefinido
+    // Se não há vencedores: empate se não houver casas vazias,
+    // caso contrário o jogo ainda não terminou (-1).
+    return (countEmpty == 0) ? 0 : -1;
 }
 
 
