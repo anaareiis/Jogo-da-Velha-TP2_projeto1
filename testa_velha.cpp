@@ -27,5 +27,15 @@ TEST_CASE("Jogador 1 vence na segunda linha") {
     REQUIRE(VerificaVelha(velha) == 1);
 }
 
+TEST_CASE("Jogador 1 vence na terceira linha") {
+    int velha[3][3] = {
+        {0, 2, 0},
+        {2, 0, 2},
+        {1, 1, 1}
+    };
+    REQUIRE(VerificaVelha(velha) == 1);
+}
+
+
  
  
