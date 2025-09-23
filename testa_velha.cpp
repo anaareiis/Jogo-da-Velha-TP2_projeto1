@@ -113,7 +113,7 @@ TEST_CASE("Jogo indefinido com casas vazias") {
     };
     REQUIRE(VerificaVelha(velha) == -1);
 }
-//Commit 26
+//Commits 26, 27 e 28
 TEST_CASE("Tabuleiro com valor inválido retorna -2") {
     int velha[3][3] = {
         {3, 0, 0},
