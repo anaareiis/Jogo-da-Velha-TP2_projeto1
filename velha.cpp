@@ -14,9 +14,14 @@
  */ 
 
 int VerificaVelha(int velha[3][3]) {
+	// Conta quantas casas vazias existem (0 = vazio)
+    int countEmpty = 0;
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+            if (velha[i][j] == 0) ++countEmpty;
+
     // Verificar vencedores
     int win1 = 0, win2 = 0;
-	int countEmpty = 0;
 
     // Linhas
     for (int i = 0; i < 3; ++i) {
@@ -44,7 +49,7 @@ int VerificaVelha(int velha[3][3]) {
     if (win2) return 2;
 
     if (countEmpty == 0) return 0; // empate
-    return 0; 
+    return -1; // ainda há jogadas possíveis -> indefinido
 }
 
 
