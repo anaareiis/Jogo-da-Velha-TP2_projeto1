@@ -14,19 +14,21 @@
  */ 
 
 int VerificaVelha(int velha[3][3]) {
-    // verifica vitórias do jogador 1 em linhas
+    // Linhas Jogador 1
     for (int i = 0; i < 3; i++) {
-        bool venceu = true;
-        for (int j = 0; j < 3; j++) {
-            if (velha[i][j] != 1) {
-                venceu = false;
-                break;
-            }
+        if (velha[i][0] == 1 && velha[i][1] == 1 && velha[i][2] == 1) {
+            return 1;
         }
-        if (venceu) return 1;
+    }
+    // Colunas Jogador 1
+    for (int j = 0; j < 3; j++) {
+        if (velha[0][j] == 1 && velha[1][j] == 1 && velha[2][j] == 1) {
+            return 1;
+        }
     }
     return 0;
 }
+
 
 
 
