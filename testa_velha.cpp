@@ -68,5 +68,15 @@ TEST_CASE("Jogador 1 vence na terceira coluna") {
 	REQUIRE(VerificaVelha(velha) == 1);
 }
 
+//Commits 12, 13 e 14
+TEST_CASE("Jogador 1 vence na diagonal principal") {
+    int velha[3][3] = {
+        {1, 0, 2},
+        {0, 1, 2},
+        {0, 0, 1}
+    };
+    REQUIRE(VerificaVelha(velha) == 1);
+}
+
  
  
