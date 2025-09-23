@@ -122,6 +122,16 @@ TEST_CASE("Tabuleiro com valor inválido retorna -2") {
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
+//Commits 29 e 30
+TEST_CASE("Tabuleiro todo do jogador 1 é impossível") {
+    int velha[3][3] = {
+        {1,1,1},
+        {1,1,1},
+        {1,1,1}
+    };
+    REQUIRE(VerificaVelha(velha) == -2);
+}
+
 
 
 
