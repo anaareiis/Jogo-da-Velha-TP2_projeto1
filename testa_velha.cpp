@@ -95,6 +95,16 @@ TEST_CASE("Jogador 2 vence na primeira linha") {
     };
     REQUIRE(VerificaVelha(velha) == 2);
 }
+//Commit 21 e 22
+TEST_CASE("Empate sem vencedores") {
+    int velha[3][3] = {
+        {1, 2, 1},
+        {2, 1, 2},
+        {2, 1, 2}
+    };
+    REQUIRE(VerificaVelha(velha) == 0);
+}
+
 
 
  
