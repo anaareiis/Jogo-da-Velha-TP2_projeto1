@@ -26,14 +26,11 @@ int VerificaVelha(int velha[3][3]) {
             return 1;
         }
     }
-	// Diagonal principal Jogador 1
-	if (velha[0][0] == 1 && velha[1][1] == 1 && velha[2][2] == 1) {
-		return 1;
-	}
-	// Diagonal secundária Jogador 1
-	if (velha[0][2] == 1 && velha[1][1] == 1 && velha[2][0] == 1) {
-    	return 1;
-	}
+	// Jogador 1 - diagonais
+    if ((velha[0][0] == 1 && velha[1][1] == 1 && velha[2][2] == 1) ||
+        (velha[0][2] == 1 && velha[1][1] == 1 && velha[2][0] == 1)) {
+        return 1;
+    }
     return 0;
 }
 
