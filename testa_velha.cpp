@@ -104,7 +104,7 @@ TEST_CASE("Empate sem vencedores") {
     };
     REQUIRE(VerificaVelha(velha) == 0);
 }
-//Commit 23
+//Commits 23, 24 e 25
 TEST_CASE("Jogo indefinido com casas vazias") {
     int velha[3][3] = {
         {1, 0, 2},
@@ -112,6 +112,15 @@ TEST_CASE("Jogo indefinido com casas vazias") {
         {0, 0, 0}
     };
     REQUIRE(VerificaVelha(velha) == -1);
+}
+//Commit 26
+TEST_CASE("Tabuleiro com valor inválido retorna -2") {
+    int velha[3][3] = {
+        {3, 0, 0},
+        {0, 1, 2},
+        {0, 0, 0}
+    };
+    REQUIRE(VerificaVelha(velha) == -2);
 }
 
 
