@@ -14,11 +14,15 @@
  */ 
 
 int VerificaVelha(int velha[3][3]) {
-	// Conta quantas casas vazias existem (0 = vazio)
+    // Validação dos valores do tabuleiro e contagem de vazios
     int countEmpty = 0;
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
-            if (velha[i][j] == 0) ++countEmpty;
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            int v = velha[i][j];
+            if (!(v == 0 || v == 1 || v == 2)) return -2; // valor inválido
+            if (v == 0) ++countEmpty;
+        }
+    }
 
     // Verificar vencedores
     int win1 = 0, win2 = 0;
