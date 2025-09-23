@@ -77,7 +77,7 @@ TEST_CASE("Jogador 1 vence na diagonal principal") {
     };
     REQUIRE(VerificaVelha(velha) == 1);
 }
-//Commit 14, 15, 16
+//Commit 14, 15 e 16
 TEST_CASE("Jogador 1 vence na diagonal secundária") {
     int velha[3][3] = {
         {0, 0, 1},
@@ -86,7 +86,7 @@ TEST_CASE("Jogador 1 vence na diagonal secundária") {
     };
     REQUIRE(VerificaVelha(velha) == 1);
 }
-//Commit 18
+//Commit 18, 19 e 20
 TEST_CASE("Jogador 2 vence na primeira linha") {
     int velha[3][3] = {
         {2, 2, 2},
