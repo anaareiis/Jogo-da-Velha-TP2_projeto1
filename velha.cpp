@@ -12,6 +12,7 @@
  *   1 -> Jogador 1 venceu
  *   2 -> Jogador 2 venceu
  *   3 -> dois jogadores venceram ao mesmo tempo (impossível)
+ *   4 -> múltiplas vitórias do mesmo jogador (impossível)
  */
 static int winner_of(const int b[3][3]) {
     int win1 = 0, win2 = 0;
@@ -19,29 +20,32 @@ static int winner_of(const int b[3][3]) {
     // Linhas
     for (int i = 0; i < 3; ++i) {
         if (b[i][0] != 0 && b[i][0] == b[i][1] && b[i][1] == b[i][2]) {
-            if (b[i][0] == 1) win1 = 1; else win2 = 1;
+            if (b[i][0] == 1) win1++; else win2++;
         }
     }
 
     // Colunas
     for (int j = 0; j < 3; ++j) {
         if (b[0][j] != 0 && b[0][j] == b[1][j] && b[1][j] == b[2][j]) {
-            if (b[0][j] == 1) win1 = 1; else win2 = 1;
+            if (b[0][j] == 1) win1++; else win2++;
         }
     }
 
     // Diagonais
     if (b[0][0] != 0 && b[0][0] == b[1][1] && b[1][1] == b[2][2]) {
-        if (b[0][0] == 1) win1 = 1; else win2 = 1;
+        if (b[0][0] == 1) win1++; else win2++;
     }
     if (b[0][2] != 0 && b[0][2] == b[1][1] && b[1][1] == b[2][0]) {
-        if (b[0][2] == 1) win1 = 1; else win2 = 1;
+        if (b[0][2] == 1) win1++; else win2++;
     }
 
-    if (win1 && win2) return 3; // dois vencedores ao mesmo tempo
-    if (win1) return 1;
-    if (win2) return 2;
-    return 0; // ninguém venceu
+    // Impossível: dois jogadores vencendo
+    if (win1 > 0 && win2 > 0) return 3;
+    // Impossível: múltiplas vitórias para o mesmo jogador
+    if (win1 > 1 || win2 > 1) return 4;
+    if (win1 == 1) return 1;
+    if (win2 == 1) return 2;
+    return 0;
 }
 
 /**
@@ -52,7 +56,7 @@ static int winner_of(const int b[3][3]) {
  *   2  -> Jogador 2 venceu
  *   0  -> Empate
  *  -1  -> Indefinido (jogo não terminou)
- *  -2  -> Impossível (estado inválido ou dois vencedores)
+ *  -2  -> Impossível (estado inválido ou múltiplos vencedores)
  */
 int VerificaVelha(int velha[3][3]) {
     int countEmpty = 0;
@@ -68,10 +72,10 @@ int VerificaVelha(int velha[3][3]) {
 
     int w = winner_of(velha);
 
-    if (w == 3) return -2; // dois vencedores ao mesmo tempo
+    if (w == 3 || w == 4) return -2; // impossível
     if (w == 1) return 1;
     if (w == 2) return 2;
 
     if (countEmpty == 0) return 0; // empate
-    return -1; // indefinido (há casas vazias e ninguém venceu ainda)
+    return -1; // indefinido
 }
