@@ -95,6 +95,69 @@ TEST_CASE("Jogador 2 vence na primeira linha") {
     };
     REQUIRE(VerificaVelha(velha) == 2);
 }
+//Commit 32
+TEST_CASE("Jogador 2 vence na segunda linha") {
+    int velha[3][3] = {
+        {1, 0, 1},
+        {2, 2, 2},
+        {0, 1, 0}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na terceira linha") {
+    int velha[3][3] = {
+        {1, 0, 1},
+        {0, 1, 0},
+        {2, 2, 2}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na primeira coluna") {
+    int velha[3][3] = {
+        {2, 1, 0},
+        {2, 1, 0},
+        {2, 0, 1}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na segunda coluna") {
+    int velha[3][3] = {
+        {1, 2, 0},
+        {0, 2, 1},
+        {0, 2, 0}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na terceira coluna") {
+    int velha[3][3] = {
+        {1, 0, 2},
+        {0, 1, 2},
+        {0, 0, 2}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na diagonal principal") {
+    int velha[3][3] = {
+        {2, 0, 1},
+        {0, 2, 1},
+        {0, 0, 2}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
+//Commit 32
+TEST_CASE("Jogador 2 vence na diagonal secundária") {
+    int velha[3][3] = {
+        {1, 0, 2},
+        {0, 2, 1},
+        {2, 1, 0}
+    };
+    REQUIRE(VerificaVelha(velha) == 2);
+}
 //Commits 21 e 22
 TEST_CASE("Empate sem vencedores") {
     int velha[3][3] = {
@@ -131,6 +194,53 @@ TEST_CASE("Tabuleiro todo do jogador 1 é impossível") {
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
+//Commit 32
+TEST_CASE("Dois vencedores é impossível") {
+    int velha[3][3] = {
+        {1,1,1},
+        {2,2,2},
+        {0,0,0}
+    };
+    REQUIRE(VerificaVelha(velha) == -2);
+}
+//Commit 32
+TEST_CASE("Múltiplas vitórias do mesmo jogador é impossível") {
+    int velha[3][3] = {
+        {1,1,1},
+        {1,1,1},
+        {2,0,2}
+    };
+    REQUIRE(VerificaVelha(velha) == -2);
+}
+//Commit 32
+TEST_CASE("Tabuleiro vazio é indefinido") {
+    int velha[3][3] = {
+        {0,0,0},
+        {0,0,0},
+        {0,0,0}
+    };
+    REQUIRE(VerificaVelha(velha) == -1);
+}
+//Commit 32
+TEST_CASE("Tabuleiro com apenas um movimento é indefinido") {
+    int velha[3][3] = {
+        {1,0,0},
+        {0,0,0},
+        {0,0,0}
+    };
+    REQUIRE(VerificaVelha(velha) == -1);
+}
+//Commit 32
+TEST_CASE("Vitória na última jogada não é empate") {
+    int velha[3][3] = {
+        {1,2,1},
+        {2,1,2},
+        {2,1,1}
+    };
+    // Jogador 1 venceu na última coluna
+    REQUIRE(VerificaVelha(velha) == 1);
+}
+
 
 
 
