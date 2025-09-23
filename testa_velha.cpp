@@ -68,7 +68,7 @@ TEST_CASE("Jogador 1 vence na terceira coluna") {
 	REQUIRE(VerificaVelha(velha) == 1);
 }
 
-//Commits 12, 13 e 14
+//Commits 12 e 13
 TEST_CASE("Jogador 1 vence na diagonal principal") {
     int velha[3][3] = {
         {1, 0, 2},
@@ -77,6 +77,16 @@ TEST_CASE("Jogador 1 vence na diagonal principal") {
     };
     REQUIRE(VerificaVelha(velha) == 1);
 }
+//Commit 14
+TEST_CASE("Jogador 1 vence na diagonal secundária") {
+    int velha[3][3] = {
+        {0, 0, 1},
+        {0, 1, 2},
+        {1, 2, 0}
+    };
+    REQUIRE(VerificaVelha(velha) == 1);
+}
+
 
  
  
