@@ -14,8 +14,9 @@
  */ 
 
 int VerificaVelha(int velha[3][3]) {
-    // vVrificar vencedores
+    // Verificar vencedores
     int win1 = 0, win2 = 0;
+	int countEmpty = 0;
 
     // Linhas
     for (int i = 0; i < 3; ++i) {
@@ -42,7 +43,8 @@ int VerificaVelha(int velha[3][3]) {
 	if (win1) return 1;
     if (win2) return 2;
 
-    return 0;
+    if (countEmpty == 0) return 0; // empate
+    return 0; 
 }
 
 
