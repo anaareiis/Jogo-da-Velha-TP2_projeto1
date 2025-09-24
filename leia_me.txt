@@ -1,6 +1,27 @@
-﻿com o g++  make e demais programas instalados 
-com todos os arquivos no mesmo diretório
-digite "make" neste diretório 
-para cada regra você pode digitar make e nome da regra ex. make cppcheck
+﻿# Instruções para Compilação e Versionamento
 
-fazer um git commit para cada teste ou código adicionado 
+1. **Pré-requisitos**
+   - g++ instalado
+   - make instalado
+   - Todos os arquivos devem estar no mesmo diretório
+
+2. **Compilação**
+   - Para compilar tudo, execute no terminal:
+     ```
+     make
+     ```
+   - Para executar uma regra específica, use:
+     ```
+     make <nome_da_regra>
+     ```
+     Exemplo:
+     ```
+     make cppcheck
+     ```
+
+3. **Controle de Versão**
+   - Faça um commit no Git para cada teste ou código adicionado:
+     ```
+     git add .
+     git commit -m "Descrição do que foi adicionado ou modificado"
+     ```

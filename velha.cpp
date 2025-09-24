@@ -1,3 +1,5 @@
+
+// Copyright 2025 Ana Areiis
 /**
  * @file velha.cpp
  * @brief Implementação da lógica do jogo da velha (tic-tac-toe).
@@ -25,35 +27,41 @@
 static int winner_of(const int b[3][3]) {
     int win1 = 0, win2 = 0;
 
+
     // Linhas
     for (int i = 0; i < 3; ++i) {
         if (b[i][0] != 0 && b[i][0] == b[i][1] && b[i][1] == b[i][2]) {
-            if (b[i][0] == 1) win1++; else win2++;
+            if (b[i][0] == 1) win1++;
+            else win2++;
         }
     }
 
     // Colunas
     for (int j = 0; j < 3; ++j) {
         if (b[0][j] != 0 && b[0][j] == b[1][j] && b[1][j] == b[2][j]) {
-            if (b[0][j] == 1) win1++; else win2++;
+            if (b[0][j] == 1) win1++;
+            else win2++;
         }
     }
 
     // Diagonais
     if (b[0][0] != 0 && b[0][0] == b[1][1] && b[1][1] == b[2][2]) {
-        if (b[0][0] == 1) win1++; else win2++;
+        if (b[0][0] == 1) win1++;
+        else win2++;
     }
     if (b[0][2] != 0 && b[0][2] == b[1][1] && b[1][1] == b[2][0]) {
-        if (b[0][2] == 1) win1++; else win2++;
+        if (b[0][2] == 1) win1++;
+        else win2++;
     }
 
+
     // Casos de impossibilidade
-    if (win1 > 0 && win2 > 0) return 3; // dois jogadores venceram
-    if (win1 > 1 || win2 > 1) return 4; // múltiplas vitórias do mesmo jogador
+    if (win1 > 0 && win2 > 0) return 3;  // dois jogadores venceram
+    if (win1 > 1 || win2 > 1) return 4;  // múltiplas vitórias do mesmo jogador
 
     if (win1 == 1) return 1;
     if (win2 == 1) return 2;
-    return 0; // ninguém venceu
+    return 0;  // ninguém venceu
 }
 
 /**
@@ -81,7 +89,7 @@ int VerificaVelha(int velha[3][3]) {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             int v = velha[i][j];
-            if (!(v == 0 || v == 1 || v == 2)) return -2; // valor inválido
+            if (!(v == 0 || v == 1 || v == 2)) return -2;  // valor inválido
             if (v == 0) ++countEmpty;
         }
     }
@@ -96,7 +104,7 @@ int VerificaVelha(int velha[3][3]) {
     if (w == 2) return 2;
 
     // Empate: ninguém venceu e tabuleiro cheio
-    if (countEmpty == 0) return 0;
+    if (countEmpty == 0) return 0;  //  empate
 
     // Indefinido: ainda há jogadas possíveis
     return -1;

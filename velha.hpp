@@ -1,5 +1,7 @@
-#ifndef VELHA_HPP
-#define VELHA_HPP
+
+// Copyright 2025 Ana Areiis
+#ifndef VELHA_HPP_
+#define VELHA_HPP_
 
 /**
  * @brief Verifica a situação do jogo da velha.
@@ -14,4 +16,4 @@
  */
 int VerificaVelha(int velha[3][3]);
 
-#endif
+#endif  // VELHA_HPP_

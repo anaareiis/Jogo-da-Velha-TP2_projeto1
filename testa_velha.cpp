@@ -1,3 +1,5 @@
+
+// Copyright 2025 Ana Areiis
 /**
  * @file testa_velha.cpp
  * @brief Testes unitários para a função VerificaVelha usando Catch2.
@@ -190,7 +192,7 @@ TEST_CASE("Empate sem vencedores") {
     REQUIRE(VerificaVelha(velha) == 0);
 }
 
-// Commit 32 (Extra) 
+// Commit 32 (Extra)
 TEST_CASE("Vitória na última jogada não é empate") {
     int velha[3][3] = {
         {1, 2, 1},
@@ -217,9 +219,9 @@ TEST_CASE("Jogo indefinido com casas vazias") {
 // Commit 32 (Extra)
 TEST_CASE("Tabuleiro vazio é indefinido") {
     int velha[3][3] = {
-        {0,0,0},
-        {0,0,0},
-        {0,0,0}
+    {0, 0, 0},
+    {0, 0, 0},
+    {0, 0, 0}
     };
     REQUIRE(VerificaVelha(velha) == -1);
 }
@@ -227,9 +229,9 @@ TEST_CASE("Tabuleiro vazio é indefinido") {
 // Commmit 32 (Extra)
 TEST_CASE("Um único movimento não define vencedor") {
     int velha[3][3] = {
-        {1,0,0},
-        {0,0,0},
-        {0,0,0}
+    {1, 0, 0},
+    {0, 0, 0},
+    {0, 0, 0}
     };
     REQUIRE(VerificaVelha(velha) == -1);
 }
@@ -241,9 +243,9 @@ TEST_CASE("Um único movimento não define vencedor") {
 // Commits 26, 27 e 28
 TEST_CASE("Tabuleiro com valor inválido retorna -2") {
     int velha[3][3] = {
-        {3, 0, 0},
-        {0, 1, 2},
-        {0, 0, 0}
+    {3, 0, 0},
+    {0, 1, 2},
+    {0, 0, 0}
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
@@ -251,9 +253,9 @@ TEST_CASE("Tabuleiro com valor inválido retorna -2") {
 // Commits 29 e 30
 TEST_CASE("Tabuleiro todo do jogador 1 é impossível") {
     int velha[3][3] = {
-        {1,1,1},
-        {1,1,1},
-        {1,1,1}
+    {1, 1, 1},
+    {1, 1, 1},
+    {1, 1, 1}
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
@@ -261,9 +263,9 @@ TEST_CASE("Tabuleiro todo do jogador 1 é impossível") {
 // Commit 32
 TEST_CASE("Dois vencedores é impossível") {
     int velha[3][3] = {
-        {1,1,1},
-        {2,2,2},
-        {0,0,0}
+    {1, 1, 1},
+    {2, 2, 2},
+    {0, 0, 0}
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
@@ -271,9 +273,9 @@ TEST_CASE("Dois vencedores é impossível") {
 // Commit 32
 TEST_CASE("Múltiplas vitórias do mesmo jogador é impossível") {
     int velha[3][3] = {
-        {1,1,1},
-        {1,1,1},
-        {2,0,2}
+    {1, 1, 1},
+    {1, 1, 1},
+    {2, 0, 2}
     };
     REQUIRE(VerificaVelha(velha) == -2);
 }
