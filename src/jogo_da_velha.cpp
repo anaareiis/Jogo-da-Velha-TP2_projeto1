@@ -1,0 +1,110 @@
+// Copyright 2025 Ana Areiis
+/**
+ * @file jogo_da_velha.cpp
+ * @brief Implementação da lógica do jogo da velha (tic-tac-toe).
+ */
+
+#include "jogo_da_velha.hpp"
+
+/**
+ * @brief Determina quem venceu no tabuleiro.
+ *
+ * Essa função verifica linhas, colunas e diagonais do tabuleiro.
+ *
+ * @param b Tabuleiro 3x3, com:
+ *        - 0 = vazio
+ *        - 1 = jogador 1
+ *        - 2 = jogador 2
+ *
+ * @return int
+ *   - 0 -> ninguém venceu
+ *   - 1 -> Jogador 1 venceu
+ *   - 2 -> Jogador 2 venceu
+ *   - 3 -> dois jogadores venceram ao mesmo tempo (impossível)
+ *   - 4 -> múltiplas vitórias do mesmo jogador (impossível)
+ */
+static int winner_of(const int b[3][3]) {
+    int win1 = 0, win2 = 0;
+
+
+    // Linhas
+    for (int i = 0; i < 3; ++i) {
+        if (b[i][0] != 0 && b[i][0] == b[i][1] && b[i][1] == b[i][2]) {
+            if (b[i][0] == 1) win1++;
+            else win2++;
+        }
+    }
+
+    // Colunas
+    for (int j = 0; j < 3; ++j) {
+        if (b[0][j] != 0 && b[0][j] == b[1][j] && b[1][j] == b[2][j]) {
+            if (b[0][j] == 1) win1++;
+            else win2++;
+        }
+    }
+
+    // Diagonais
+    if (b[0][0] != 0 && b[0][0] == b[1][1] && b[1][1] == b[2][2]) {
+        if (b[0][0] == 1) win1++;
+        else win2++;
+    }
+    if (b[0][2] != 0 && b[0][2] == b[1][1] && b[1][1] == b[2][0]) {
+        if (b[0][2] == 1) win1++;
+        else win2++;
+    }
+
+
+    // Casos de impossibilidade
+    if (win1 > 0 && win2 > 0) return 3;  // dois jogadores venceram
+    if (win1 > 1 || win2 > 1) return 4;  // múltiplas vitórias do mesmo jogador
+
+    if (win1 == 1) return 1;
+    if (win2 == 1) return 2;
+    return 0;  // ninguém venceu
+}
+
+/**
+ * @brief Verifica a situação do jogo da velha.
+ *
+ * A função valida o tabuleiro e determina se há um vencedor,
+ * empate, jogo em andamento ou estado impossível.
+ *
+ * @param velha Tabuleiro 3x3:
+ *        - 0 = vazio
+ *        - 1 = jogador 1
+ *        - 2 = jogador 2
+ *
+ * @return int
+ *   - 1  -> Jogador 1 venceu
+ *   - 2  -> Jogador 2 venceu
+ *   - 0  -> Empate
+ *   - -1 -> Indefinido (jogo não terminou)
+ *   - -2 -> Impossível (estado inválido ou múltiplos vencedores)
+ */
+int VerificaVelha(int velha[3][3]) {
+    int countEmpty = 0;
+
+    // Validação e contagem de casas vazias
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            int v = velha[i][j];
+            if (!(v == 0 || v == 1 || v == 2)) return -2;  // valor inválido
+            if (v == 0) ++countEmpty;
+        }
+    }
+
+    int w = winner_of(velha);
+
+    // Estados impossíveis
+    if (w == 3 || w == 4) return -2;
+
+    // Vitória normal
+    if (w == 1) return 1;
+    if (w == 2) return 2;
+
+    // Empate: ninguém venceu e tabuleiro cheio
+    if (countEmpty == 0) return 0;  //  empate
+
+    // Indefinido: ainda há jogadas possíveis
+    return -1;
+}

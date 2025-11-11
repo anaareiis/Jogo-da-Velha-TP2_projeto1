@@ -1,0 +1,6 @@
+*.o
+*.exe
+*.gc*
+testa_velha
+valgrind.rpt
+build/

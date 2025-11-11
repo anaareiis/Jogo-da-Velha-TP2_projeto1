@@ -5,7 +5,7 @@
  * @brief Testes unitários para a função VerificaVelha usando Catch2.
  */
 
-#include "velha.hpp"
+#include "../src/jogo_da_velha.hpp"
 
 #define CATCH_CONFIG_MAIN
 #include "catch_amalgamated.hpp"

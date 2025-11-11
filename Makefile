@@ -1,41 +1,35 @@
-all:	testa_velha.cpp velha.cpp velha.hpp velha.o catch_amalgamated.cpp
-	g++ -std=c++14 -Wall velha.o testa_velha.cpp catch_amalgamated.cpp -o testa_velha
-	./testa_velha
-	# Compilação completa e execução dos testes
+all: test
 
-compile:	testa_velha.cpp velha.cpp velha.hpp velha.o catch_amalgamated.cpp
-	g++ -std=c++14 -Wall velha.o testa_velha.cpp catch_amalgamated.cpp -o testa_velha
+# Build object for library/source
+src/jogo_da_velha.o: src/jogo_da_velha.cpp src/jogo_da_velha.hpp
+	g++ -std=c++14 -Wall -c src/jogo_da_velha.cpp -o src/jogo_da_velha.o
 
-velha.o:	velha.cpp velha.hpp
-	g++ -std=c++14 -Wall -c velha.cpp
-	
-testa_velha:	testa_velha.cpp velha.cpp velha.hpp velha.o catch_amalgamated.cpp
-	g++ -std=c++14 -Wall velha.o testa_velha.cpp catch_amalgamated.cpp -o testa_velha
-	
-test:	testa_velha	
-	./testa_velha
-	
-cpplint:	testa_velha.cpp velha.cpp velha.hpp
-	cpplint --exclude=catch_amalgamated.hpp *.*
+# Run tests (link source object + test TU + Catch)
+test: src/jogo_da_velha.o tests/testa_jogo.cpp tests/catch_amalgamated.cpp
+	g++ -std=c++14 -Wall src/jogo_da_velha.o tests/testa_jogo.cpp tests/catch_amalgamated.cpp -o testa_jogo
+	./testa_jogo
 
-gcov:	testa_velha.cpp velha.cpp velha.hpp catch_amalgamated.cpp
-	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c velha.cpp
-	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c testa_velha.cpp
-	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c catch_amalgamated.cpp
-	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage velha.o testa_velha.o catch_amalgamated.o -o testa_velha
-	./testa_velha
-	gcov *.cpp	
+compile: src/jogo_da_velha.o tests/testa_jogo.cpp tests/catch_amalgamated.cpp
+	g++ -std=c++14 -Wall src/jogo_da_velha.o tests/testa_jogo.cpp tests/catch_amalgamated.cpp -o testa_jogo
 
-debug:	testa_velha.cpp velha.cpp velha.hpp catch_amalgamated.cpp
-	g++ -std=c++14 -Wall -g -c velha.cpp
-	g++ -std=c++14 -Wall -g velha.o testa_velha.cpp catch_amalgamated.cpp -o testa_velha
-	gdb testa_velha
-	
-cppcheck:	testa_velha.cpp velha.cpp velha.hpp
-	cppcheck --enable=warning .
+gcov: src/jogo_da_velha.cpp tests/testa_jogo.cpp tests/catch_amalgamated.cpp
+	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c src/jogo_da_velha.cpp -o src/jogo_da_velha.o
+	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c tests/testa_jogo.cpp -o tests/testa_jogo.o
+	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage -c tests/catch_amalgamated.cpp -o tests/catch_amalgamated.o
+	g++ -std=c++14 -Wall -fprofile-arcs -ftest-coverage src/jogo_da_velha.o tests/testa_jogo.o tests/catch_amalgamated.o -o testa_jogo
+	./testa_jogo
+	gcov *.cpp
 
-valgrind: testa_velha
-	valgrind --leak-check=yes --log-file=valgrind.rpt ./testa_velha
+debug: src/jogo_da_velha.cpp tests/testa_jogo.cpp tests/catch_amalgamated.cpp
+	g++ -std=c++14 -Wall -g -c src/jogo_da_velha.cpp -o src/jogo_da_velha.o
+	g++ -std=c++14 -Wall -g src/jogo_da_velha.o tests/testa_jogo.cpp tests/catch_amalgamated.cpp -o testa_jogo
+	gdb testa_jogo
+
+cpplint: src/jogo_da_velha.cpp src/jogo_da_velha.hpp tests/testa_jogo.cpp
+	cpplint --exclude=catch_amalgamated.hpp src/* tests/*
+
+valgrind: test
+	valgrind --leak-check=yes --log-file=docs/valgrind.rpt ./testa_jogo
 
 clean:
-	rm -rf *.o *.exe *.gc* testa_velha
+	rm -rf *.o *.exe *.gc* testa_jogo src/*.o tests/*.o
